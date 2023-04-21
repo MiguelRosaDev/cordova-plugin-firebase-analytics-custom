@@ -17,12 +17,12 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <engines>
         <engine name="cordova" version=">=7.1.0"/>
         <engine name="cordova-android" version=">=8.1.0"/>
-        <engine name="cordova-ios" version=">=5.1.1"/>
+        <engine name="cordova-ios" version=">=6.2.0"/>
     </engines>
 
     <preference name="ANALYTICS_COLLECTION_ENABLED" default="true" />
     <preference name="AUTOMATIC_SCREEN_REPORTING_ENABLED" default="true" />
-    <preference name="USER_TRACKING_DESCRIPTION_IOS" default="$(PRODUCT_NAME) needs your attention." />
+    <preference name="USER_TRACKING_DESCRIPTION_IOS" default="Esta informação será utilizada para lhe apresentar anúncios personalizados." />
 
     <dependency id="cordova-outsystems-firebase-core" url="https://github.com/OutSystems/cordova-outsystems-firebase-core.git#1.0.1"/>
 
