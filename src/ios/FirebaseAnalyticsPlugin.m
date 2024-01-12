@@ -19,6 +19,14 @@
     NSString* ConsentTypeAdUserData = [command.arguments objectAtIndex:2];
     NSString* ConsentTypeAdPersonalization = [command.arguments objectAtIndex:3];
 
+    [FIRAnalytics setConsent:@{
+        FIRConsentTypeAdPersonalization : FIRConsentStatusGranted,
+        FIRConsentTypeAdStorage : FIRConsentStatusDenied,
+        FIRConsentTypeAdUserData : FIRConsentStatusGranted,
+        FIRConsentTypeAnalyticsStorage : FIRConsentStatusDenied,
+    }];
+
+/*
     NSMutableDictionary *consentDictionary = [NSMutableDictionary dictionary];
     
     if ([ConsentTypeAnalyticsStorage isEqualToString:@"true"]) {
@@ -46,6 +54,7 @@
     }
     
     [FIRAnalytics setConsent:consentDictionary];
+    */
 
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
