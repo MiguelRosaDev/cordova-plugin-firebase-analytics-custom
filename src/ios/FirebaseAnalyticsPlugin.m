@@ -13,6 +13,17 @@
     }
 }
 
+- (void)setConsent:(CDVInvokedUrlCommand *)command {
+    NSString* ConsentTypeAnalyticsStorage = [command.arguments objectAtIndex:0];
+    NSString* ConsentTypeAdStorage = [command.arguments objectAtIndex:1];
+    NSString* ConsentTypeAdUserData = [command.arguments objectAtIndex:2];
+    NSString* ConsentTypeAdPersonalization = [command.arguments objectAtIndex:3];
+
+
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 - (void)logEvent:(CDVInvokedUrlCommand *)command {
     NSString* name = [command.arguments objectAtIndex:0];
     NSDictionary* parameters = [command.arguments objectAtIndex:1];
