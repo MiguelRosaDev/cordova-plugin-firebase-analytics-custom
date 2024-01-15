@@ -38,6 +38,13 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
     }
 
     @CordovaMethod
+    private void setConsent(String name, JSONObject params, CallbackContext callbackContext) throws JSONException {
+        this.firebaseAnalytics.logEvent(name, parse(params));
+
+        callbackContext.success();
+    }
+
+    @CordovaMethod
     private void setUserId(String userId, CallbackContext callbackContext) {
         this.firebaseAnalytics.setUserId(userId);
 
