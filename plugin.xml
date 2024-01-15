@@ -80,6 +80,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <!--<preference name="ANDROID_FIREBASE_ANALYTICS_VERSION" default="21.1.+"/>-->
         <!--<preference name="ANDROID_FIREBASE_ANALYTICS_VERSION" default="21.3.+"/>-->
         <preference name="ANDROID_FIREBASE_ANALYTICS_VERSION" default="21.5.0"/>
+        <preference name="ANDROID_FIREBASE_BOM_VERSION" default="32.5.0" />
 
         <hook type="before_plugin_install" src="hooks/android/build_gradle_add_dependency.js" /> 
 
@@ -101,6 +102,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
         <dependency id="cordova-support-android-plugin" version="~1.0.0"/>
 
+        <framework src="platform('com.google.firebase:firebase-bom:$ANDROID_FIREBASE_BOM_VERSION')" />
         <framework src="com.google.firebase:firebase-analytics:$ANDROID_FIREBASE_ANALYTICS_VERSION" />
         <framework src="build.gradle" custom="true" type="gradleReference" />
 
