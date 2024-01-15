@@ -8,8 +8,6 @@ import by.chemerisuk.cordova.support.CordovaMethod;
 import by.chemerisuk.cordova.support.ReflectiveCordovaPlugin;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.analytics.ConsentType;
-import com.google.firebase.analytics.ConsentStatus;
 
 import org.apache.cordova.CallbackContext;
 import org.json.JSONException;
@@ -44,16 +42,16 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
         
         Map<ConsentType, ConsentStatus> consentMap = new EnumMap<>(ConsentType.class);
         if (params.has("ConsentTypeAnalyticsStorage") && params.getBoolean("ConsentTypeAnalyticsStorage")) {
-            consentMap.put(ConsentType.ANALYTICS_STORAGE, ConsentStatus.GRANTED);
+            consentMap.put(this.firebaseAnalytics.ConsentType.ANALYTICS_STORAGE, this.firebaseAnalytics.ConsentStatus.GRANTED);
         }
         if (params.has("ConsentTypeAdStorage") && params.getBoolean("ConsentTypeAdStorage")) {
-            consentMap.put(ConsentType.AD_STORAGE, ConsentStatus.GRANTED);
+            consentMap.put(this.firebaseAnalytics.ConsentType.AD_STORAGE, this.firebaseAnalytics.ConsentStatus.GRANTED);
         }
         if (params.has("ConsentTypeAdUserData") && params.getBoolean("ConsentTypeAdUserData")) {
-            consentMap.put(ConsentType.AD_USER_DATA, ConsentStatus.GRANTED);
+            consentMap.put(this.firebaseAnalytics.ConsentType.AD_USER_DATA, this.firebaseAnalytics.ConsentStatus.GRANTED);
         }
         if (params.has("ConsentTypeAdPersonalization") && params.getBoolean("ConsentTypeAdPersonalization")) {
-            consentMap.put(ConsentType.AD_PERSONALIZATION, ConsentStatus.GRANTED);
+            consentMap.put(this.firebaseAnalytics.ConsentType.AD_PERSONALIZATION, this.firebaseAnalytics.ConsentStatus.GRANTED);
         }
         
         this.firebaseAnalytics.setConsent(consentMap);
