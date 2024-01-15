@@ -8,6 +8,8 @@ import by.chemerisuk.cordova.support.CordovaMethod;
 import by.chemerisuk.cordova.support.ReflectiveCordovaPlugin;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.analytics.ConsentType;
+import com.google.firebase.analytics.ConsentStatus;
 
 import org.apache.cordova.CallbackContext;
 import org.json.JSONException;
