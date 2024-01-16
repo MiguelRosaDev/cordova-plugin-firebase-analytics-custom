@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.EnumMap;
 
 public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
     private static final String TAG = "FirebaseAnalyticsPlugin";
@@ -54,7 +55,7 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
             consentMap.put(FirebaseAnalytics.ConsentType.AD_PERSONALIZATION, FirebaseAnalytics.ConsentStatus.GRANTED);
         }
         
-        FirebaseAnalytics.setConsent(consentMap);
+        this.firebaseAnalytics.setConsent(consentMap);
 
         callbackContext.success();
     }
