@@ -63,7 +63,7 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
         FirebaseAnalytics.ConsentStatus consentStatus = "true".equalsIgnoreCase(consentString) ?
                 FirebaseAnalytics.ConsentStatus.GRANTED : FirebaseAnalytics.ConsentStatus.DENIED;
         
-        Log.w(TAG, "Batata Value for consentStatus " + consentStatus");
+        Log.w(TAG, "Batata Value for consentStatus " + consentStatus);
         consentMap.put(consentType, consentStatus);
     }
 
