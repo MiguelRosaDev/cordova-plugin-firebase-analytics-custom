@@ -12,6 +12,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import org.apache.cordova.CallbackContext;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -40,11 +41,13 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
 
     @CordovaMethod
     private void setConsent(String name, JSONObject params, CallbackContext callbackContext) throws JSONException {
+
+        JSONArray jsonArray = new JSONArray(params);
         
-        boolean consentTypeAnalyticsStorage = params.getBoolean(0);
-        boolean consentTypeAdStorage = params.getBoolean(1);
-        boolean consentTypeAdUserData = params.getBoolean(2);
-        boolean consentTypeAdPersonalization = params.getBoolean(3);
+        String consentTypeAnalyticsStorage = jsonArray.getString(0);
+        String consentTypeAdStorage = jsonArray.getString(1);
+        String consentTypeAdUserData = jsonArray.getString(2);
+        String consentTypeAdPersonalization = jsonArray.getString(3);
 
         Map<FirebaseAnalytics.ConsentType, FirebaseAnalytics.ConsentStatus> consentMap = new EnumMap<>(FirebaseAnalytics.ConsentType.class);
         mapConsentStringToMap(consentMap, FirebaseAnalytics.ConsentType.ANALYTICS_STORAGE, consentTypeAnalyticsStorage);
@@ -56,8 +59,9 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
 
         callbackContext.success();
     }
-    private void mapConsentBooleanToMap(Map<FirebaseAnalytics.ConsentType, FirebaseAnalytics.ConsentStatus> consentMap, FirebaseAnalytics.ConsentType consentType, boolean consentBoolean) {
-        FirebaseAnalytics.ConsentStatus consentStatus = consentBoolean ? FirebaseAnalytics.ConsentStatus.GRANTED : FirebaseAnalytics.ConsentStatus.DENIED;
+    private void mapConsentStringToMap(Map<FirebaseAnalytics.ConsentType, FirebaseAnalytics.ConsentStatus> consentMap, FirebaseAnalytics.ConsentType consentType, String consentString) {
+        FirebaseAnalytics.ConsentStatus consentStatus = "true".equalsIgnoreCase(consentString) ?
+                FirebaseAnalytics.ConsentStatus.GRANTED : FirebaseAnalytics.ConsentStatus.DENIED;
     
         consentMap.put(consentType, consentStatus);
     }
