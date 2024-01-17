@@ -41,35 +41,26 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
     @CordovaMethod
     private void setConsent(String name, JSONObject params, CallbackContext callbackContext) throws JSONException {
         
+        String consentTypeAnalyticsStorage = params.getString(0);
+        String consentTypeAdStorage = params.getString(1);
+        String consentTypeAdUserData = params.getString(2);
+        String consentTypeAdPersonalization = params.getString(3);
+
         Map<FirebaseAnalytics.ConsentType, FirebaseAnalytics.ConsentStatus> consentMap = new EnumMap<>(FirebaseAnalytics.ConsentType.class);
-        if (params.has("ConsentTypeAnalyticsStorage") && params.getBoolean("ConsentTypeAnalyticsStorage")) {
-            consentMap.put(FirebaseAnalytics.ConsentType.ANALYTICS_STORAGE, FirebaseAnalytics.ConsentStatus.GRANTED);
-            Log.d(TAG, "batata ANALYTICS_STORAGE GRANTED");
-        }else{
-            consentMap.put(FirebaseAnalytics.ConsentType.ANALYTICS_STORAGE, FirebaseAnalytics.ConsentStatus.DENIED);
-            Log.d(TAG, "batata ANALYTICS_STORAGE DENIED");
-        }
-        if (params.has("ConsentTypeAdStorage") && params.getBoolean("ConsentTypeAdStorage")) {
-            consentMap.put(FirebaseAnalytics.ConsentType.AD_STORAGE, FirebaseAnalytics.ConsentStatus.GRANTED);
-            Log.d(TAG, "batata AD_STORAGE GRANTED");
-        }else{
-            consentMap.put(FirebaseAnalytics.ConsentType.AD_STORAGE, FirebaseAnalytics.ConsentStatus.DENIED);
-            Log.d(TAG, "batata AD_STORAGE DENIED");
-        }
-        if (params.has("ConsentTypeAdUserData") && params.getBoolean("ConsentTypeAdUserData")) {
-            consentMap.put(FirebaseAnalytics.ConsentType.AD_USER_DATA, FirebaseAnalytics.ConsentStatus.GRANTED);
-        }else{
-            consentMap.put(FirebaseAnalytics.ConsentType.AD_USER_DATA, FirebaseAnalytics.ConsentStatus.DENIED);
-        }
-        if (params.has("ConsentTypeAdPersonalization") && params.getBoolean("ConsentTypeAdPersonalization")) {
-            consentMap.put(FirebaseAnalytics.ConsentType.AD_PERSONALIZATION, FirebaseAnalytics.ConsentStatus.GRANTED);
-        }else{
-            consentMap.put(FirebaseAnalytics.ConsentType.AD_PERSONALIZATION, FirebaseAnalytics.ConsentStatus.DENIED);
-        }
+        mapConsentStringToMap(consentMap, FirebaseAnalytics.ConsentType.ANALYTICS_STORAGE, consentTypeAnalyticsStorage);
+        mapConsentStringToMap(consentMap, FirebaseAnalytics.ConsentType.AD_STORAGE, consentTypeAdStorage);
+        mapConsentStringToMap(consentMap, FirebaseAnalytics.ConsentType.AD_USER_DATA, consentTypeAdUserData);
+        mapConsentStringToMap(consentMap, FirebaseAnalytics.ConsentType.AD_PERSONALIZATION, consentTypeAdPersonalization);
         
         this.firebaseAnalytics.setConsent(consentMap);
 
         callbackContext.success();
+    }
+    private void mapConsentStringToMap(Map<FirebaseAnalytics.ConsentType, FirebaseAnalytics.ConsentStatus> consentMap, FirebaseAnalytics.ConsentType consentType, String consentString) {
+        FirebaseAnalytics.ConsentStatus consentStatus = "true".equalsIgnoreCase(consentString) ?
+                FirebaseAnalytics.ConsentStatus.GRANTED : FirebaseAnalytics.ConsentStatus.DENIED;
+    
+        consentMap.put(consentType, consentStatus);
     }
 
     @CordovaMethod
