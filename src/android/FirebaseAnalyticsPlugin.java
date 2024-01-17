@@ -62,7 +62,8 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
     private void mapConsentStringToMap(Map<FirebaseAnalytics.ConsentType, FirebaseAnalytics.ConsentStatus> consentMap, FirebaseAnalytics.ConsentType consentType, String consentString) {
         FirebaseAnalytics.ConsentStatus consentStatus = "true".equalsIgnoreCase(consentString) ?
                 FirebaseAnalytics.ConsentStatus.GRANTED : FirebaseAnalytics.ConsentStatus.DENIED;
-    
+        
+        Log.w(TAG, "Batata Value for consentStatus " + consentStatus");
         consentMap.put(consentType, consentStatus);
     }
 
