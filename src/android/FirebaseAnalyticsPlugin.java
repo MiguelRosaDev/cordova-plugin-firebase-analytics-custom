@@ -40,7 +40,7 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
     }
 
     @CordovaMethod
-    private void setConsent(String name, JSONObject params, CallbackContext callbackContext) throws JSONException {
+    private void setConsent(JSONObject params, CallbackContext callbackContext) throws JSONException {
 
         Log.d(TAG, "setConsent init");
         
