@@ -35,14 +35,12 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
     @CordovaMethod
     private void logEvent(String name, JSONObject params, CallbackContext callbackContext) throws JSONException {
         this.firebaseAnalytics.logEvent(name, parse(params));
-        Log.d(TAG, "logEvent init");
+
         callbackContext.success();
     }
 
     @CordovaMethod
     private void setConsent(String consentTypeAnalyticsStorage, String consentTypeAdStorage, String consentTypeAdUserData, String consentTypeAdPersonalization, CallbackContext callbackContext) throws JSONException {
-
-        Log.d(TAG, "setConsent init");
 
         Map<FirebaseAnalytics.ConsentType, FirebaseAnalytics.ConsentStatus> consentMap = new EnumMap<>(FirebaseAnalytics.ConsentType.class);
         mapConsentStringToMap(consentMap, FirebaseAnalytics.ConsentType.ANALYTICS_STORAGE, consentTypeAnalyticsStorage);
@@ -58,7 +56,6 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
         FirebaseAnalytics.ConsentStatus consentStatus = "true".equalsIgnoreCase(consentString) ?
                 FirebaseAnalytics.ConsentStatus.GRANTED : FirebaseAnalytics.ConsentStatus.DENIED;
         
-        Log.d(TAG, "setConsent init " + consentString);
         consentMap.put(consentType, consentStatus);
     }
 
