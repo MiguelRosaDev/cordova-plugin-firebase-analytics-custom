@@ -42,6 +42,8 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
     @CordovaMethod
     private void setConsent(String name, JSONObject params, CallbackContext callbackContext) throws JSONException {
 
+        Log.d(TAG, "setConsent init");
+        
         JSONArray jsonArray = new JSONArray(params);
         
         String consentTypeAnalyticsStorage = jsonArray.getString(0);
@@ -63,7 +65,7 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
         FirebaseAnalytics.ConsentStatus consentStatus = "true".equalsIgnoreCase(consentString) ?
                 FirebaseAnalytics.ConsentStatus.GRANTED : FirebaseAnalytics.ConsentStatus.DENIED;
         
-        Log.w(TAG, "Batata Value for consentStatus " + consentStatus);
+        Log.d(TAG, "setConsent init " + consentString);
         consentMap.put(consentType, consentStatus);
     }
 
