@@ -40,16 +40,9 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
     }
 
     @CordovaMethod
-    private void setConsent(JSONObject params, CallbackContext callbackContext) throws JSONException {
+    private void setConsent(String consentTypeAnalyticsStorage, String consentTypeAdStorage, String consentTypeAdUserData, String consentTypeAdPersonalization, CallbackContext callbackContext) throws JSONException {
 
         Log.d(TAG, "setConsent init");
-        
-        JSONArray jsonArray = new JSONArray(params);
-        
-        String consentTypeAnalyticsStorage = jsonArray.getString(0);
-        String consentTypeAdStorage = jsonArray.getString(1);
-        String consentTypeAdUserData = jsonArray.getString(2);
-        String consentTypeAdPersonalization = jsonArray.getString(3);
 
         Map<FirebaseAnalytics.ConsentType, FirebaseAnalytics.ConsentStatus> consentMap = new EnumMap<>(FirebaseAnalytics.ConsentType.class);
         mapConsentStringToMap(consentMap, FirebaseAnalytics.ConsentType.ANALYTICS_STORAGE, consentTypeAnalyticsStorage);
