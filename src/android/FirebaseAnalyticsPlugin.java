@@ -35,7 +35,6 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
     @CordovaMethod
     private void logEvent(String name, JSONObject params, CallbackContext callbackContext) throws JSONException {
         this.firebaseAnalytics.logEvent(name, parse(params));
-        Log.d(TAG, "LogEvent " + name);
         callbackContext.success();
     }
 
@@ -56,7 +55,6 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
         FirebaseAnalytics.ConsentStatus consentStatus = "true".equalsIgnoreCase(consentString) ?
                 FirebaseAnalytics.ConsentStatus.GRANTED : FirebaseAnalytics.ConsentStatus.DENIED;
 
-        Log.d(TAG, "SetConsent " + consentString);
         consentMap.put(consentType, consentStatus);
     }
 
